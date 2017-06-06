@@ -23,7 +23,7 @@ class TodoList extends Component {
           {todos.map(item => {
             const findNode = (path) => new RegExp(/[0-9]+/).exec(path);
             const node = findNode(item.path);
-            let taskStyling, divStyling, contentEditable, liContent;
+            let taskStyling, contentEditable, liContent;
             item.field_finished_ === 'Finished' ?
               (taskStyling = 'strikethru') && (contentEditable = false) :
               contentEditable = true;
@@ -31,7 +31,7 @@ class TodoList extends Component {
               <div className='todoItem' key={item.uuid}>
                 <li
                   ref={content => liContent = content}
-                  onKeyPress={() => patchData(node, liContent.innerText, null, null)}
+                  onKeyUp={() => patchData(node, liContent.innerText, null, null)}
                   contentEditable={contentEditable}
                   className={taskStyling}
                   id={node}>{item.field_task}
