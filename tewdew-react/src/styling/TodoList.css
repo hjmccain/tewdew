@@ -6,6 +6,10 @@
   display: none;
 }
 
+.strikethru {
+  cursor: pointer;
+}
+
 p {
   cursor: pointer;
   user-select: none;

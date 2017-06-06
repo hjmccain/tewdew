@@ -1,7 +1,17 @@
 import base64 from 'base-64';
 
-const patchData = (node, bool, func) => {
+const patchData = (node, task, bool, func) => {
   const credentials = base64.encode('hmccain:droopyjuice');
+  let key, value;
+  console.log(bool);
+  if (bool) {
+    console.log(bool)
+    key = "field_finished_";
+    value = [(bool === 'Finished') ? "0" : "1"];
+  } else {console.log(task)
+    key = "field_task";
+    value = [task];
+  }
 
   fetch(
     `/node/${node}`, {
@@ -16,12 +26,15 @@ const patchData = (node, bool, func) => {
             "href": "http://tewdew:8888/rest/type/node/to_do"
           }
         },
-        "field_finished_": [bool === 'Finished' ? "0" : "1"]
+        [key]: value
       })
     }
   ).then(res => res.json()
   ).then(data => {
-    func(data.uuid[0].value);
+    if (func) {
+      console.log('running function')
+      func(data.uuid[0].value)
+    };
     console.log(data)
   }).catch(err => console.error('ERROR:', err));
 }

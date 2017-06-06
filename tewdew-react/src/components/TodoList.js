@@ -20,24 +20,23 @@ class TodoList extends Component {
     return (
       <div>
         <ul>
-          {todos.map((item) => {
+          {todos.map(item => {
             const findNode = (path) => new RegExp(/[0-9]+/).exec(path);
             const node = findNode(item.path);
-            let taskStyling, divStyling, contentEditable;
-            if (item.field_finished_ === 'Finished') {
-              taskStyling = 'strikethru';
-              contentEditable = false;
-            } else {
+            let taskStyling, divStyling, contentEditable, liContent;
+            item.field_finished_ === 'Finished' ?
+              (taskStyling = 'strikethru') && (contentEditable = false) :
               contentEditable = true;
-            }
             return (
               <div className='todoItem' key={item.uuid}>
                 <li
+                  ref={content => liContent = content}
+                  onKeyPress={() => patchData(node, liContent.innerText, null, null)}
                   contentEditable={contentEditable}
                   className={taskStyling}
                   id={node}>{item.field_task}
                 </li>
-                <p onClick={() => patchData(node, item.field_finished_, toggleStrikethru)}>Mark as finished</p>
+                <p onClick={() => patchData(node, item.field_task, item.field_finished_, toggleStrikethru)}>Mark as finished</p>
                 <p onClick={() => this.confirmAndDelete(node, item.uuid, removeFromList)}>Delete</p>
               </div>
             )
@@ -49,3 +48,5 @@ class TodoList extends Component {
 }
 
 export default TodoList;
+
+//
