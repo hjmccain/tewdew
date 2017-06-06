@@ -23,7 +23,8 @@ class NewTodo extends Component {
             }
           },
           "title": [this.todo.value],
-          "field_task": [this.todo.value]
+          "field_task": [this.todo.value],
+          "field_finished_": ["1"]
         })
       }
     ).then(res => res.json()
