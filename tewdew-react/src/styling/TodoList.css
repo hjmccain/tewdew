@@ -5,3 +5,16 @@
 .hidden {
   display: none;
 }
+
+li {
+  cursor: pointer;
+  user-select: none;
+}
+
+li:hover {
+  color: blue;
+}
+
+.todoItem * {
+  display: inline-block;
+}

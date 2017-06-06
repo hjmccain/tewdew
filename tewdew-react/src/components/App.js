@@ -18,11 +18,36 @@ class App extends Component {
     }).catch(err => console.error('ERROR:', err))
   }
 
+  prependToList(item, path, uuid) {
+    console.log('item', item);
+    const newState = [{ field_task: item, path, uuid }, ...this.state.todos];
+    console.log('newState', newState);
+    this.setState({ todos: newState });
+  }
+
+  removeFromList(uuid) {
+    const { todos } = this.state;
+    const idx = todos.findIndex(node => node.uuid === uuid);
+    this.setState({ todos: [...todos.slice(0, idx), ...todos.slice(idx+1)]});
+  }
+
+  toggleStrikethru(uuid) {
+    const { todos } = this.state;
+    const item = todos.filter(node => node.uuid === uuid);
+    let finished = item[0].field_finished_ === 'Unfinished' ? 'Finished' : 'Unfinished';
+    const newItem = { field_task: item[0].field_task, path: item[0].path, uuid: item[0].uuid, field_finished_: finished}
+    const idx = todos.findIndex(node => node.uuid === uuid);
+    this.setState({ todos: [...todos.slice(0, idx), newItem, ...todos.slice(idx+1)]});
+  }
+
   render() {
     return (
       <div className="App">
-        <TodoList todos={this.state.todos} />
-        <NewTodo />
+        <TodoList
+          todos={this.state.todos}
+          removeFromList={this.removeFromList.bind(this)}
+          toggleStrikethru={this.toggleStrikethru.bind(this)}/>
+        <NewTodo prependToList={this.prependToList.bind(this)}/>
       </div>
     );
   }
