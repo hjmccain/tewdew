@@ -23,10 +23,15 @@ class TodoList extends Component {
           {todos.map(item => {
             const findNode = (path) => new RegExp(/[0-9]+/).exec(path);
             const node = findNode(item.path);
-            let taskStyling, contentEditable, liContent;
-            item.field_finished_ === 'Finished' ?
-              (taskStyling = 'strikethru') && (contentEditable = false) :
+            let taskStyling, contentEditable, liContent, icon;
+            if (item.field_finished_ === 'Finished') {
+              taskStyling = 'strikethru';
+              contentEditable = false;
+              icon = <i className="fa fa-check-square-o" aria-hidden="true"></i>;
+            } else {
               contentEditable = true;
+              icon = <i className="fa fa-square-o" aria-hidden="true"></i>;
+            }
             return (
               <div className='todoItem' key={item.uuid}>
                 <li
@@ -36,8 +41,8 @@ class TodoList extends Component {
                   className={taskStyling}
                   id={node}>{item.field_task}
                 </li>
-                <p onClick={() => patchData(node, item.field_task, item.field_finished_, toggleStrikethru)}>Mark as finished</p>
-                <p onClick={() => this.confirmAndDelete(node, item.uuid, removeFromList)}>Delete</p>
+                <p onClick={() => patchData(node, item.field_task, item.field_finished_, toggleStrikethru)}>{icon}</p>
+                <p onClick={() => this.confirmAndDelete(node, item.uuid, removeFromList)}><i className="fa fa-trash-o" aria-hidden="true"></i></p>
               </div>
             )
           })}
