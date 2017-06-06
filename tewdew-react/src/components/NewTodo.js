@@ -5,17 +5,18 @@ import postData from './restComponents/post';
 class NewTodo extends Component {
   printValue(e) {
     e.preventDefault();
-    console.log(this.todo.value);
-    postData(this.todo.value, this.props.prependToList);
+    this.todo.value ?
+      postData(this.todo.value, this.props.prependToList) :
+      alert('Please enter a to-do item!')
     this.todo.value = '';
   }
 
   render() {
     return (
-      <div>
+      <form onSubmit={this.printValue.bind(this)}>
         <input ref={(todo) => {this.todo = todo}}/>
-        <button onClick={this.printValue.bind(this)}>New To-do</button>
-      </div>
+        <button>New To-do</button>
+      </form>
     )
   }
 }

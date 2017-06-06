@@ -4,9 +4,7 @@ import NewTodo from './NewTodo';
 import '../styling/App.css';
 
 class App extends Component {
-  state = {
-    todos: []
-  }
+  state = { todos: [] }
 
   componentWillMount() {
     fetch(
@@ -19,9 +17,7 @@ class App extends Component {
   }
 
   prependToList(item, path, uuid) {
-    console.log('item', item);
     const newState = [{ field_task: item, path, uuid }, ...this.state.todos];
-    console.log('newState', newState);
     this.setState({ todos: newState });
   }
 
@@ -34,7 +30,7 @@ class App extends Component {
   toggleStrikethru(uuid) {
     const { todos } = this.state;
     const item = todos.filter(node => node.uuid === uuid);
-    let finished = item[0].field_finished_ === 'Unfinished' ? 'Finished' : 'Unfinished';
+    const finished = item[0].field_finished_ === 'Unfinished' ? 'Finished' : 'Unfinished';
     const newItem = { field_task: item[0].field_task, path: item[0].path, uuid: item[0].uuid, field_finished_: finished}
     const idx = todos.findIndex(node => node.uuid === uuid);
     this.setState({ todos: [...todos.slice(0, idx), newItem, ...todos.slice(idx+1)]});

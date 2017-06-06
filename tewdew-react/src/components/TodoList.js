@@ -4,6 +4,16 @@ import deleteData from './restComponents/delete';
 import '../styling/TodoList.css';
 
 class TodoList extends Component {
+  constructor() {
+    super();
+    this.confirmAndDelete = this.confirmAndDelete.bind(this);
+  }
+
+  confirmAndDelete(node, uuid, func) {
+    if (window.confirm('Are you sure you want to delete this item?')) {
+      deleteData(node, uuid, func)
+    }
+  }
 
   render() {
     const { todos, removeFromList, toggleStrikethru } = this.props;
@@ -13,17 +23,22 @@ class TodoList extends Component {
           {todos.map((item) => {
             const findNode = (path) => new RegExp(/[0-9]+/).exec(path);
             const node = findNode(item.path);
-            let taskStyling;
-            if (item.field_finished_ === 'Finished') { taskStyling = 'strikethru' }
-            if (item.field_visible_ === 'Deleted') { taskStyling = 'hidden' }
+            let taskStyling, divStyling, contentEditable;
+            if (item.field_finished_ === 'Finished') {
+              taskStyling = 'strikethru';
+              contentEditable = false;
+            } else {
+              contentEditable = true;
+            }
             return (
-              <div className={'todoItem'} key={item.uuid}>
-                <p onClick={() => deleteData(node, item.uuid, removeFromList)}>X</p>
+              <div className='todoItem' key={item.uuid}>
                 <li
-                  onDoubleClick={() => patchData(node, item.field_finished_, toggleStrikethru)}
+                  contentEditable={contentEditable}
                   className={taskStyling}
                   id={node}>{item.field_task}
                 </li>
+                <p onClick={() => patchData(node, item.field_finished_, toggleStrikethru)}>Mark as finished</p>
+                <p onClick={() => this.confirmAndDelete(node, item.uuid, removeFromList)}>Delete</p>
               </div>
             )
           })}

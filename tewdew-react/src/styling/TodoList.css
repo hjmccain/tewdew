@@ -6,15 +6,16 @@
   display: none;
 }
 
-li {
+p {
   cursor: pointer;
   user-select: none;
 }
 
-li:hover {
-  color: blue;
+p:hover {
+  color: red;
 }
 
 .todoItem * {
   display: inline-block;
+  margin-right: 10px;
 }
