@@ -39,11 +39,13 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <TodoList
-          todos={this.state.todos}
-          removeFromList={this.removeFromList.bind(this)}
-          toggleStrikethru={this.toggleStrikethru.bind(this)}/>
-        <NewTodo prependToList={this.prependToList.bind(this)}/>
+        <div className="center-content">
+          <TodoList
+            todos={this.state.todos}
+            removeFromList={this.removeFromList.bind(this)}
+            toggleStrikethru={this.toggleStrikethru.bind(this)}/>
+          <NewTodo prependToList={this.prependToList.bind(this)}/>
+        </div>
       </div>
     );
   }

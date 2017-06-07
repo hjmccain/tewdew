@@ -27,10 +27,10 @@ class TodoList extends Component {
             if (item.field_finished_ === 'Finished') {
               taskStyling = 'strikethru';
               contentEditable = false;
-              icon = <i className="fa fa-check-square-o" aria-hidden="true"></i>;
+              icon = <i className="fa fa-check-square-o fa-lg" aria-hidden="true"></i>;
             } else {
               contentEditable = true;
-              icon = <i className="fa fa-square-o" aria-hidden="true"></i>;
+              icon = <i className="fa fa-square-o fa-lg" aria-hidden="true"></i>;
             }
             return (
               <div className='todoItem' key={item.uuid}>
@@ -42,7 +42,7 @@ class TodoList extends Component {
                   id={node}>{item.field_task}
                 </li>
                 <p onClick={() => patchData(node, item.field_task, item.field_finished_, toggleStrikethru)}>{icon}</p>
-                <p onClick={() => this.confirmAndDelete(node, item.uuid, removeFromList)}><i className="fa fa-trash-o" aria-hidden="true"></i></p>
+                <p onClick={() => this.confirmAndDelete(node, item.uuid, removeFromList)}><i className="fa fa-trash-o fa-lg" aria-hidden="true"></i></p>
               </div>
             )
           })}

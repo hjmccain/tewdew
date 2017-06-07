@@ -1,25 +1,62 @@
+ul {
+  padding-left: 7px;
+}
+
+li {
+  margin-right: 10px;
+}
+
+input {
+  margin-right: 10px;
+}
+
+button {
+  background-color: #DFDFDF;
+  padding: 6px 9px 9px 9px;
+  position: relative;
+  top: 3px;
+}
+
+input, button {
+  height: 40px;
+  border: 2px solid #C6C6C6;
+  border-radius: 5px;
+}
+
+form {
+  padding-bottom: 10px;
+}
+
 .strikethru {
   text-decoration: line-through;
-}
-
-.hidden {
-  display: none;
-}
-
-.strikethru {
   cursor: pointer;
 }
 
 p {
   cursor: pointer;
   user-select: none;
+  display: inline-block;
+  height: auto;
+  vertical-align: top;
+  margin: 0px;
 }
 
 p:hover {
-  color: red;
+  color: gray;
 }
 
 .todoItem * {
   display: inline-block;
-  margin-right: 10px;
+}
+
+.fa {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin: 0px;
+}
+
+.fa-trash-o {
+  position: relative;
+  top: -2px;
 }
