@@ -1,19 +1,15 @@
 import React, { Component } from 'react';
 import TodoList from './TodoList';
 import NewTodo from './NewTodo';
+import { connect } from 'react-redux';
+import { fetchTodosFromServer } from '../state/actions';
 import '../styling/App.css';
 
 class App extends Component {
   state = { todos: [] }
 
   componentWillMount() {
-    fetch(
-      '/api/todos'
-    ).then(res => res.json()
-    ).then(data => {
-      this.setState({ todos: data });
-      console.log(data)
-    }).catch(err => console.error('ERROR:', err))
+    this.props.fetchTodosFromServer();
   }
 
   prependToList(item, path, uuid) {
@@ -51,4 +47,8 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  todos: state.todos
+});
+
+export default connect (mapStateToProps, { fetchTodosFromServer })(App);
