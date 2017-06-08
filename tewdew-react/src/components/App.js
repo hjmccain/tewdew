@@ -6,8 +6,6 @@ import { fetchTodosFromServer } from '../state/actions';
 import '../styling/App.css';
 
 class App extends Component {
-  state = { todos: [] }
-
   componentWillMount() {
     this.props.fetchTodosFromServer();
   }
@@ -33,17 +31,17 @@ class App extends Component {
   }
 
   render() {
-    return (
+    return this.props.todos ?
       <div className="App">
         <div className="center-content">
           <NewTodo prependToList={this.prependToList.bind(this)}/>
           <TodoList
-            todos={this.state.todos}
+            todos={this.props.todos}
             removeFromList={this.removeFromList.bind(this)}
             toggleStrikethru={this.toggleStrikethru.bind(this)}/>
         </div>
       </div>
-    );
+      : <div></div>
   }
 }
 
