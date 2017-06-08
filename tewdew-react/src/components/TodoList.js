@@ -34,6 +34,8 @@ class TodoList extends Component {
             }
             return (
               <div className='todoItem' key={item.uuid}>
+                <p onClick={() => this.confirmAndDelete(node, item.uuid, removeFromList)}><i className="fa fa-trash-o fa-lg" aria-hidden="true"></i></p>
+                <p onClick={() => patchData(node, item.field_task, item.field_finished_, toggleStrikethru)}>{icon}</p>
                 <li
                   ref={content => liContent = content}
                   onKeyUp={() => patchData(node, liContent.innerText, null, null)}
@@ -41,8 +43,6 @@ class TodoList extends Component {
                   className={taskStyling}
                   id={node}>{item.field_task}
                 </li>
-                <p onClick={() => patchData(node, item.field_task, item.field_finished_, toggleStrikethru)}>{icon}</p>
-                <p onClick={() => this.confirmAndDelete(node, item.uuid, removeFromList)}><i className="fa fa-trash-o fa-lg" aria-hidden="true"></i></p>
               </div>
             )
           })}

@@ -40,11 +40,11 @@ class App extends Component {
     return (
       <div className="App">
         <div className="center-content">
+          <NewTodo prependToList={this.prependToList.bind(this)}/>
           <TodoList
             todos={this.state.todos}
             removeFromList={this.removeFromList.bind(this)}
             toggleStrikethru={this.toggleStrikethru.bind(this)}/>
-          <NewTodo prependToList={this.prependToList.bind(this)}/>
         </div>
       </div>
     );

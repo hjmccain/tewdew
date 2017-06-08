@@ -8,23 +8,27 @@ li {
 
 input {
   margin-right: 10px;
+  border: 1px solid #C6C6C6;
+  padding-left: 5px;
 }
 
 button {
+  border: none;
   background-color: #DFDFDF;
-  padding: 6px 9px 9px 9px;
-  position: relative;
-  top: 3px;
+  padding: 8px 9px 9px 9px;
+}
+
+button:hover {
+  cursor: pointer;
+  opacity: 0.7;
 }
 
 input, button {
   height: 40px;
-  border: 2px solid #C6C6C6;
-  border-radius: 5px;
 }
 
 form {
-  padding-bottom: 10px;
+  padding-top: 20px;
 }
 
 .strikethru {
@@ -41,8 +45,8 @@ p {
   margin: 0px;
 }
 
-p:hover {
-  color: gray;
+.fa:hover {
+  opacity: 0.5;
 }
 
 .todoItem * {
@@ -50,6 +54,7 @@ p:hover {
 }
 
 .fa {
+  color: #bababa;
   display: inline-block;
   width: 30px;
   height: 30px;
