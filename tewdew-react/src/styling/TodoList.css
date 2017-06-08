@@ -14,8 +14,10 @@ input {
 
 button {
   border: none;
-  background-color: #DFDFDF;
+  background-color: #00DEAF;
   padding: 8px 9px 9px 9px;
+  color: white;
+  font-weight: 300;
 }
 
 button:hover {
